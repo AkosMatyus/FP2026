@@ -71,7 +71,9 @@ pozAtlag ls = atlag [i | i<-ls,i>0]
 listaN ls n = [i | (idx,i) <- zip [1 ..] ls , mod idx n==0]
 
 -- - tükrözi egy lista elemeit,
+tukroz ls = reverse ls
 
+tukroz2 ls = map (reverse . show) ls
 
 -- - két módszerrel is meghatározza egy lista legnagyobb elemeinek pozícióit: a lista elemeit kétszer járja be, illetve úgy hogy a lista elemeit csak egyszer járja be,
 -- - meghatározza egy lista leggyakrabban előforduló elemét.
