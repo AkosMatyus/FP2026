@@ -1,5 +1,6 @@
 import Text.XHtml (base, abbr, reset, name)
-import System.Win32 (LOCALESIGNATURE(lsCsbDefault))
+import System.Win32 (LOCALESIGNATURE(lsCsbDefault), aCCESS_SYSTEM_SECURITY, SECURITY_ATTRIBUTES (nLength))
+import Language.Haskell.TH (prim)
 -- # 1. labor
 
 -- I. Könyvtárfüggvények használata nélkül, definiáljuk azt a függvényt, amely meghatározza
@@ -214,3 +215,91 @@ main = do
     print (negyzetszam 10)
     putStrLn "Kob"
     print (kob 10)
+
+
+duplaOsszeg a b = 2*(a+b)
+
+haromSzorzata a b c = a*b*c
+
+nagyobb a b = max a b
+
+legkisebb3 a b c 
+    | a < b && a < c = a
+    | b < a && b < c = b
+    | otherwise = c
+
+parosE a = even a
+
+paratlanE a = odd a
+
+elojelSz a
+    | a < 0 = "negativ"
+    | a > 0 = "pozitiv"
+    | otherwise = "0"
+
+
+absz a
+    | a < 0 = (-1)*a
+    | otherwise = a
+
+oszthato3 a = mod a 3 == 0
+
+oszthato2_5 a = mod a 2 == 0 && mod a 5 == 0
+
+pontszam a 
+    | a >= 90 && a <= 100 = "jeles"
+    | a >= 80 && a <= 89 = "jo"
+    | a >= 70 && a <= 79 = "kozepes"
+    | a >= 60 && a <= 69 = "elgseges"
+    | a >= 0 && a <= 59 = "elegtelen"
+    | otherwise = error "rossz input"
+
+firstNRec n
+    | n < 0 = error "rossz input"
+    | n == 0 = 0
+    | otherwise = n + firstNRec(n-1)
+
+firstNRecMult n
+    | n < 0 = error "rossz input"
+    | n == 0 = 1
+    | otherwise = n * firstNRecMult(n-1)
+
+expo n x 
+    | x < 0 = error "rossz input"
+    | x == 1 = n
+    | otherwise = n * expo n (x-1)
+
+
+elsoNParatlan n
+    | n < 0 = error "rossz input"
+    | n == 0 = 0
+    | otherwise =  (2*n - 1) + elsoNParatlan(n-1)
+
+elsoNParos n 
+    | n < 0 = error "rossz input"
+    | n == 0 = 0
+    | otherwise = (2*n) + elsoNParos(n-1)
+
+elsoNLista n = [0..n-1]
+
+elsoNListaParos n = [i*2 | i <- [0..n-1]]
+
+elsoNListaParatlan n = [i*2+1 | i <- [0..n-1]]
+
+elsoNNegyzet n = [i^2 | i <- [0..n-1]]
+
+elsoNKob n = [i^3 | i <- [0..n-1]]
+
+nOszthato3 n = [i | i <- [1..n], mod i 3 == 0]
+
+nOszthato2not4 n = [i | i <- [1..n], mod i 2 == 0 && mod i 4 /= 0]
+
+reciprok n = [sqrt i | i <- [1..n]]
+
+osztok2 n = [i | i <- [1..n], mod n i == 0]
+
+valosOsztok n = [i | i <- [2..(div n 2)], mod n i == 0]
+
+primE n = hossz == 0
+    where 
+        hossz = length(valosOsztok n)
